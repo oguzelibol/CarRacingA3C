@@ -1,0 +1,41 @@
+Files:
+------
+1. a3c.py
+The main file which launches the threads and triggers them.
+
+2. a3c_display.py
+Used to see the performance of a saved checkpoint
+
+3. a3c_thread.py
+Contains the class which represents a single training thread
+
+4. constants.py
+Configurable constants used to control the learning algorithm parameters as well as the game settings (like actions and save intervals)
+
+5. game_network.py
+The Actor-Critic FF N/W code.
+
+6. game_state.py
+Code specifc to the game / openai gym environment.
+
+7. rmsprop_applier.py
+Root Mean Square Propagation applier for the game network
+
+8. savedata.py
+The data structure which is saved after every episode ends on thread 0.
+
+8. saver.py
+Class with code that handles saving of the savedata.
+
+
+How to run:
+-----------
+1. Configure parameters in constants.py, mainly the number of threads to launch
+2. On terminal, type: python a3c.py
+3. The training begins and in about 24 hours, it completes around 2M iterations on a 2013/5 top-end Macbook Pro.
+4. Note the last saved checkpoint number and run it as: python a3c_display.py checkpoint-ABCDEF
+
+Output:
+-------
+1. The directory called checkpoints saves the snapshots of all the checkpoints.
+2. scores-saved.json contains the scores and policies at the end of each episode.
