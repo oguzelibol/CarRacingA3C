@@ -85,7 +85,7 @@ def init_network(device, learning_rate_input):
 def init_tf():
     session = tf.Session(config=tf.ConfigProto(log_device_placement=False,
                                                allow_soft_placement=True))
-    init = tf.initialize_all_variables()
+    init = tf.global_variables_initializer()
     session.run(init)
 
     return session
@@ -114,9 +114,9 @@ def run_system_threads(session, data, summary, saver):
 
 def init_tf_summary(session):
     score_input = tf.placeholder(tf.int32)
-    tf.scalar_summary("score", score_input)
-    summary_op      =  tf.merge_all_summaries()
-    summary_writer  =  tf.train.SummaryWriter(Constants.LOG_FILE, session.graph)
+    tf.summary.scalar("score", score_input)
+    summary_op      =  tf.summary.merge_all()
+    summary_writer  =  tf.summary.FileWriter(Constants.LOG_FILE, session.graph)
     return summary_writer, summary_op, score_input
 
 
